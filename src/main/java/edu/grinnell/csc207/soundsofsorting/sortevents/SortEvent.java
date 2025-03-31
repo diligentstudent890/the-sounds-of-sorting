@@ -18,7 +18,7 @@ public interface SortEvent<T> {
     public List<Integer> getAffectedIndices();
 
     /**
-     * @return <code>true</code> iff this event is emphasized
+     * @return true if this event is emphasized
      */
     public boolean isEmphasized();
 }

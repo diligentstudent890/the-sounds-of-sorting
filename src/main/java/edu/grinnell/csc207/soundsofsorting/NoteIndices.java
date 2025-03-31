@@ -1,53 +1,88 @@
 package edu.grinnell.csc207.soundsofsorting;
 
+import java.util.Random;
+import java.util.Arrays;
+
 /**
  * A collection of indices into a Scale object.
- * These indices are the subject of the various sorting algorithms
- * in the program.
  */
 public class NoteIndices {
+    private Integer[] indices;
+    private boolean[] highlighted;
+    
     /**
-     * @param n the size of the scale object that these indices map into
+     * Construct a NoteIndices object of the given size.
+     * Initially, the indices are in sorted order.
+     * @param n the size 
      */
     public NoteIndices(int n) {
-        // TODO: fill me in!
+        indices = new Integer[n];
+        highlighted = new boolean[n];
+        for (int i = 0; i < n; i++) {
+            indices[i] = i;
+            highlighted[i] = false;
+        }
     }
     
     /**
-     * Reinitializes this collection of indices to map into a new scale object
-     * of the given size.  The collection is also shuffled to provide an
-     * initial starting point for the sorting process.
-     * @param n the size of the scale object that these indices map into
+     * Reinitialize the indices for a scale of size n and shuffle them.
+     * @param n the new number of indices
      */
     public void initializeAndShuffle(int n) {
-        // TODO: fill me in!
-    }
-    
-    /** @return the indices of this NoteIndices object */
-    public Integer[] getNotes() { 
-        // TODO: fill me in!
-        return null;
+        indices = new Integer[n];
+        highlighted = new boolean[n];
+        for (int i = 0; i < n; i++) {
+            indices[i] = i;
+            highlighted[i] = false;
+        }
+        shuffle();
     }
     
     /**
-     * Highlights the given index of the note array
-     * @param index the index to highlight
+     * Return the array of note indices.
+     * @return the indices array.
+     */
+    public Integer[] getNotes() {
+        return indices;
+    }
+    
+    /**
+     * Highlight a specific note index.
+     * @param index the index to highlight.
      */
     public void highlightNote(int index) {
-        // TODO: fill me in
+        if (index >= 0 && index < highlighted.length) {
+            highlighted[index] = true;
+        }
     }
     
     /**
-     * @param index the index to check
-     * @return true if the given index is highlighted
+     * Check if the given index is highlighted.
+     * @param index the index to check.
+     * @return true if highlighted.
      */
     public boolean isHighlighted(int index) {
-        // TODO: fill me in
-        return false;
+        return (index >= 0 && index < highlighted.length) ? highlighted[index] : false;
     }
     
-    /** Clears all highlighted indices from this collection */
+    /**
+     * Clear all highlighted indices.
+     */
     public void clearAllHighlighted() {
-        // TODO: fill me in
+        Arrays.fill(highlighted, false);
+    }
+    
+    /**
+     * Shuffle the indices array using Fisher-Yates algorithm.
+     */
+    public void shuffle() {
+        Random rand = new Random();
+        for (int i = indices.length - 1; i > 0; i--) {
+            int j = rand.nextInt(i + 1);
+            Integer temp = indices[i];
+            indices[i] = indices[j];
+            indices[j] = temp;
+        }
+        clearAllHighlighted();
     }
 }

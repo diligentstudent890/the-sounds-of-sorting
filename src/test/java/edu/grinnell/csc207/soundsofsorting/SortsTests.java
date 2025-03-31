@@ -12,7 +12,7 @@ public class SortsTests {
     /**
      * @param <T> the carrier type of the array
      * @param arr the array to check
-     * @return true iff <code>arr</code> is sorted.
+     * @return true if arr is sorted.
      */
     public static <T extends Comparable<? super T>> boolean sorted(T[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
