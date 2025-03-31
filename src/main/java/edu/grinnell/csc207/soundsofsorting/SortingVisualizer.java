@@ -1,7 +1,6 @@
 package edu.grinnell.csc207.soundsofsorting;
 
 import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
 
 /**
@@ -13,8 +12,8 @@ public class SortingVisualizer {
     private static final int HEIGHT = 300;
    
     /**
-     * The main entry point to the program
-     * @param args the command-line arguments
+     * The main entry point to the program.
+     * @param args the command-line arguments.
      * @throws InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {        
@@ -23,7 +22,7 @@ public class SortingVisualizer {
         NoteIndices notes = new NoteIndices(0);
         
         ArrayPanel arrayPanel = new ArrayPanel(notes, WIDTH, HEIGHT);
-        ControlPanel controlPanel = new ControlPanel(notes, arrayPanel); 
+        ControlPanel controlPanel = new ControlPanel(notes, arrayPanel);
         
         frame.setTitle("Sorting Visualizer");
         frame.add(controlPanel, BorderLayout.PAGE_END);
