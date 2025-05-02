@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import edu.grinnell.csc207.soundsofsorting.sortevents.*;
 import edu.grinnell.csc207.soundsofsorting.sortevents.SortEvent;
-
-/**
- * This is a collection of sorting algorithm implementations that produce a list of events
- * for visualization and sound. Each sorting method returns a list of SortEvent<T>
- * that can be applied to the original array to reproduce the sort.
- * Includes an eventSort method to apply a sequence of events to an array.
- */
+/** 
+     * Help sorting
+     */
 public class Sorts {
 
     /** 
@@ -79,13 +75,13 @@ public class Sorts {
             // Compare and shift elements to the right to create position for toInsert
             while (j > 0) {
                 // Always compare a[j-1] with the value to insert
-                events.add(new CompareEvent<T>(j-1, i));
-                if (a[j-1].compareTo(toInsert) <= 0) {
+                events.add(new CompareEvent<T>(j - 1, i));
+                if (a[j - 1].compareTo(toInsert) <= 0) {
                     break;
                 }
                 // Shift a[j-1] to a[j]
-                events.add(new CopyEvent<T>(j, a[j-1]));
-                a[j] = a[j-1];
+                events.add(new CopyEvent<T>(j, a[j - 1]));
+                a[j] = a[j - 1];
                 j--;
             }
             // Place the toInsert value at position j
@@ -112,12 +108,12 @@ public class Sorts {
         do {
             swapped = false;
             for (int i = 1; i < n; ++i) {
-                events.add(new CompareEvent<T>(i-1, i));
-                if (a[i-1].compareTo(a[i]) > 0) {
+                events.add(new CompareEvent<T>(i - 1, i));
+                if (a[i - 1].compareTo(a[i]) > 0) {
                     // swap adjacent elements
-                    events.add(new SwapEvent<T>(i-1, i));
-                    T temp = a[i-1];
-                    a[i-1] = a[i];
+                    events.add(new SwapEvent<T>(i - 1, i));
+                    T temp = a[i - 1];
+                    a[i - 1] = a[i];
                     a[i] = temp;
                     swapped = true;
                 }
@@ -145,10 +141,12 @@ public class Sorts {
 
     // Helper for mergeSort (recursive)
     private static <T extends Comparable<T>> void mergeSortHelper(T[] a, int lo, int hi, List<SortEvent<T>> events) {
-        if (lo >= hi) return;
+        if (lo >= hi) {
+            return;
+        }
         int mid = (lo + hi) / 2;
         mergeSortHelper(a, lo, mid, events);
-        mergeSortHelper(a, mid+1, hi, events);
+        mergeSortHelper(a, mid + 1, hi, events);
         // Merge sorted subarrays [lo..mid] and [mid+1..hi]
         T[] aux = a.clone(); // copy entire array (could optimize to copy only needed segment)
         int i = lo;
@@ -197,7 +195,9 @@ public class Sorts {
 
     // Helper for quickSort
     private static <T extends Comparable<T>> void quickSortHelper(T[] a, int lo, int hi, List<SortEvent<T>> events) {
-        if (lo >= hi) return;
+        if (lo >= hi) {
+            return;
+        }
         // simple pivot selection: last element
         T pivot = a[hi];
         int i = lo;
@@ -219,8 +219,8 @@ public class Sorts {
         a[i] = a[hi];
         a[hi] = temp;
         // recursively sort left and right partitions
-        quickSortHelper(a, lo, i-1, events);
-        quickSortHelper(a, i+1, hi, events);
+        quickSortHelper(a, lo, i - 1, events);
+        quickSortHelper(a, i + 1, hi, events);
     }
 
     /**
@@ -249,8 +249,8 @@ public class Sorts {
                         break;
                     }
                     // shift a[j-gap] to a[j]
-                    events.add(new CopyEvent<T>(j, a[j-gap]));
-                    a[j] = a[j-gap];
+                    events.add(new CopyEvent<T>(j, a[j - gap]));
+                    a[j] = a[j - gap];
                     j -= gap;
                 }
                 // place temp at its correct position

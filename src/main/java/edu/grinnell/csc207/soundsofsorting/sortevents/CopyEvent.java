@@ -13,6 +13,10 @@ public class CopyEvent<T> implements SortEvent<T> {
     private final int index;
     private final T value;
 
+    /**
+     * @param index
+     * @param value
+     */
     public CopyEvent(int index, T value) {
         this.index = index;
         this.value = value;
